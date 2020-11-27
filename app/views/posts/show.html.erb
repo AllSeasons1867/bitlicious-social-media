@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @post.body %>
+</p>
+
+<div>
+  <small>
+    Posted <%= time_ago_in_words(@post.created_at) %> ago
+  </small>
+  <small>
+    Last edited <%= time_ago_in_words(@post.updated_at) %> ago
+  </small>
+  <small>
+    Seen <%= @post.view_count %> time(s)
+  </small>
+  <small>Posted by <%= @post.user&.full_name || "[DELETED]" %></small>
+</div>
+<% if user_signed_in? && can?(:manage, @post) %>
+<%= link_to 'Delete', @post, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<% end %>
+<%= link_to 'Back', posts_path(:page => "0")  %>
+
+<h3> Comments </h3>
+
+<%= form_for [@post, @new_comment] do |f| %>
+  <%#= f.hidden_field :post_id, value: @post.id %>
+  <div>
+    <%= f.text_area(
+      :body, cols: 60, rows: 6,
+      placeholder: "What are your thoughts?"
+    ) %>
+  </div>
+  <%= f.submit "Comment" %>
+<% end %>
+
+<div> 
+    <% @comments.each do |comment| %>
+        <div>
+          <p>
+            <%= comment.body %> <br />
+            <small>
+              Posted <%= time_ago_in_words(comment.created_at) %> ago
+            </small>
+            <small>
+            Posted by <%= comment.user&.full_name || "[DELETED]" %> 
+          </small>
+          </p>
+        </div>
+        <% if user_signed_in? && can?(:manage, comment) %>
+        <small><%= link_to("Delete Comment", post_comment_path(@post,comment),method: :delete, data: { confirm: "Are you sure?"}) %></small>
+        <small><%= link_to("Edit Comment", edit_comment_path(comment)) %></small>
+        <% end %>
+      <% end %>
+<div>
+

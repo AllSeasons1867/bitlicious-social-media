@@ -1,0 +1,80 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+
+ body {
+    color: white !important;
+    background-image: image-url("helmsdeep.jpg");
+    background-repeat: no-repeat ;
+    background-size: cover ;
+    background-attachment: fixed;
+ }
+
+ .jumbotron {
+    background-color: rgba-white-slight;
+    color: black;
+ }
+
+ footer {
+    /* background-color: #CCCCFF; */
+    margin-top: auto;
+    line-height: 1;
+}
+
+.footer-paragraph {
+   font-size: 0.8em;
+}
+
+.nav-brick-wall {
+   background-image: image-url("brickwall.png");
+}
+
+.nav-link a {
+   color: white;
+}
+
+// .navbar-toggler-icon, navbar-toggler {
+//    color: white;
+// }
+
+// button.navbar-toggler {
+//    color: white;
+// }
+
+#page-container {
+   position: relative;
+   min-height: 100vh;
+ }
+ 
+ #content-wrap {
+   padding-bottom: 2.5rem;    /* Footer height */
+ }
+ 
+ #footer {
+   position: absolute;
+   bottom: 0;
+   width: 100%;
+   height: 2.5rem;            /* Footer height */
+ }
+
+
+ /* footer {
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  } */

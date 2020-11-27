@@ -1,0 +1,27 @@
+<%= form_with(model: story_comment, local: true) do |form| %>
+  <% if story_comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(story_comment.errors.count, "error") %> prohibited this story_comment from being saved:</h2>
+
+      <ul>
+        <% story_comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </div>
+
+  <div class="field">
+    <%= form.label :story_id %>
+    <%= form.text_field :story_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

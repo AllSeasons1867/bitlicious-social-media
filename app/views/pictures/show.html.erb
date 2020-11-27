@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @picture.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @picture.description %>
+</p>
+
+<p>
+  <%= image_tag(@picture.picture) %>
+</p>
+
+<small>Posted by <%= @picture.user&.full_name || "[DELETED]" %></small>
+<% if user_signed_in? && can?(:manage, @picture)%>
+<%= link_to 'Destroy', @picture, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Edit', edit_picture_path(@picture) %> |
+<% end %>
+<%= link_to 'Back', pictures_path(:page => "0") %>
+
+<h2>Comments</h2>
+
+<%= form_for [@picture, @picture_comment] do |f| %>
+  <%#= f.hidden_field :picture_id, value: @picture.id %>
+    <div>
+      <%= f.text_area(:body, cols: 60, rows: 6, placeholder: "How do you like this picture?") %>
+    </div>
+  <%= f.submit "Submit" %>
+<% end %>
+
+<div class="answer-list">
+  <% @picture_comments.each do |comment| %>
+    <div>
+      <p>
+        <%= comment.body %> <br />
+        <small>
+          Post <%= time_ago_in_words(comment.created_at) %> ago
+        </small>
+        <small>Posted by <%= comment.user&.full_name || "[DELETED]" %></small>
+      </p>
+      <% if user_signed_in? && can?(:manage, comment)%>
+      <small><%= link_to("Delete Comment", picture_comment_path(comment),method: :delete, data: { confirm: "Are you sure?"}) %></small>
+      <small><%= link_to("Edit Comment", edit_picture_comment_path(comment)) %></small>
+      <% end %>
+    </div>
+  <% end %>
+</div>

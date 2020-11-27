@@ -1,0 +1,92 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Stories</h1>
+<div>
+<%= link_to 'Post a New Story', new_story_path, class: "btn btn-lg btn-primary" %>
+</div>
+<br>
+
+
+
+
+<% unless @page == 0 %>
+<%= link_to "First Page", stories_path(page: 0) %>
+|
+<%= link_to "Previous Page", stories_path(page: @page - 1) %>
+|
+<% end %>
+
+
+
+<% unless (@page + 1) > (@allstories / @storiesperpage) %>
+<% unless ((@page + 1) * @storiesperpage) == @allstories %>
+  <%= link_to "Next Page", stories_path(page: @page + 1) %>
+  |
+      <% if (@allstories % @storiesperpage) == 0 %>
+      |
+        <%= link_to "Last Page", stories_path(page: ((@allstories / @storiesperpage)-1)) %>
+      <% else %>
+      |
+        <%= link_to "Last Page", stories_path(page: ((@allstories / @storiesperpage))) %>
+      <% end %>
+<% end %>
+<% end %>
+
+
+
+
+
+
+
+<table class="container">
+  <thead>
+    <tr class="row">
+      <th class="col-4">Title</th>
+      <th class="col-4">Snippet</th>
+      <th class="col-1"></th>
+      <th class="col-1"></th>
+      <th class="col-1"></th>
+      <th class="col-1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stories.each do |story| %>
+      <tr class="row">
+        <td class="col-4 title"><%= link_to story.title, story %></td>
+        <td class="col-4 body"><%= story.body %></td>
+        <% if false %>
+        <td class="col-1"><%= link_to 'Show', story %></td>
+        <% if user_signed_in? && can?(:manage, story) %>
+        <td class="col-1"><%= link_to 'Edit', edit_story_path(story) %></td>
+        <td class="col-1"><%= link_to 'Destroy', story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+        <% end %>
+        <td class="col-1"><small>Posted by <%= story.user&.full_name || "[DELETED]" %></small></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+
+<script type="text/javascript">
+window.onload = function() {
+    let title = document.getElementsByClassName("title");
+      for (let i = 0; i < title.length; i++) {
+        if (title[i].innerHTML.length > 100) {
+          title[i].innerHTML = title[i].innerHTML.slice(0,100)+"..."
+        } 
+      }
+      let body = document.getElementsByClassName("body");
+      for (let i = 0; i < body.length; i++) {
+        if (body[i].innerHTML.length > 50) {
+          body[i].innerHTML = body[i].innerHTML.slice(0,50)+"..."
+        } 
+      }
+}
+</script>
+
+

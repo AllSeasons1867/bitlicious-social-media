@@ -1,0 +1,27 @@
+<%= form_with(model: picture_comment, local: true) do |form| %>
+  <% if picture_comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(picture_comment.errors.count, "error") %> prohibited this picture_comment from being saved:</h2>
+
+      <ul>
+        <% picture_comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </div>
+
+  <div class="field">
+    <%= form.label :picture_id %>
+    <%= form.text_field :picture_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

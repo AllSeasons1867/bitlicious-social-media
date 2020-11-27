@@ -1,0 +1,2 @@
+module PictureCommentsHelper
+end

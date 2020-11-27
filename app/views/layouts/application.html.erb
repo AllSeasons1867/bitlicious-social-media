@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Helms Deep</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
+  </head>
+  <body>
+    <div id="page-container">    
+    <%= render 'layouts/navbar' %>
+      <div class="container" id="content-wrap"> 
+      <%= yield %>
+    </div>
+    <%= render 'layouts/footer' %>
+    </div>
+    </body>
+</html>
+
+
+

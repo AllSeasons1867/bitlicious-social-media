@@ -1,0 +1,62 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @video.title %>
+</p>
+<% if false %>
+<div style="width:400px; height:400px">
+<%= image_tag(@video.thumbnail, style:'width:100%;height:auto') %>
+</div>
+<% end %>
+<div style="width:80%; height:80%;">
+<%= video_tag(url_for(@video.clip), style:'width:100%;height:auto', controls: '') %>
+</div>
+<p>
+  <strong>Description:</strong>
+  <%= @video.description %>
+</p>
+
+<p>
+  <small>Seen <%= @video.view_count %> time(s) </small>
+  <small>Posted by <%= @video.user&.full_name || "[DELETED]" %></small>
+</p>
+<% if user_signed_in? && can?(:manage, @video)%>
+<%= link_to 'Edit Video Submission', edit_video_path(@video) %> |
+<%= link_to 'Destroy', @video, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<% end %>
+<%= link_to 'Back to Video Index', videos_path(:page => "0") %>
+
+<h2>Comments</h2>
+<%= form_for [@video, @video_comment] do |f| %>
+  <%#= f.hidden_field :video_id, value: @video.id %>
+  <div>
+    <%= f.text_area(
+      :body, cols: 60, rows: 6,
+      placeholder: "Tell us what you think of this video!"
+    ) %>
+  </div>
+  <%= f.submit "Submit Video Comment" %>
+<% end %>
+
+<div>
+  <% @video_comments.each do |comment| %>
+    <div>
+      <p>
+        <%= comment.body %> <br />
+        <small>
+          Posted <%= time_ago_in_words(comment.created_at) %> ago
+        </small>
+      </p>
+      <% if user_signed_in? && can?(:manage, comment) %>
+      <small><%= link_to("Delete Video Comment", video_video_comment_path(@video,comment),method: :delete, data: { confirm: "Are you sure?"}) %></small>
+      <small><%= link_to("Edit Video Comment", edit_video_comment_path(comment)) %></small>
+      <% end %>
+      <small>Posted by <%= comment.user&.full_name || "[DELETED]" %></small>
+    </div>
+  <% end %>
+</div>
+
+
+
+

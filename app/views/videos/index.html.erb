@@ -1,0 +1,84 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Videos</h1>
+
+<div class="">
+  <%= link_to 'Submit A Video', new_video_path, class: "btn btn-lg btn-primary" %>
+</div>
+<br>
+
+
+
+<% unless @page == 0 %>
+<%= link_to "First Page", videos_path(page: 0) %>
+|
+<%= link_to "Previous Page", videos_path(page: @page - 1) %>
+|
+<% end %>
+
+
+
+<% unless (@page + 1) > (@allvideos / @videosperpage) %>
+<% unless ((@page + 1) * @videosperpage) == @allvideos %>
+  <%= link_to "Next Page", videos_path(page: @page + 1) %>
+  |
+    <% if (@allvideos % @videosperpage) == 0 %>
+    |
+      <%= link_to "Last Page", videos_path(page: ((@allvideos / @videosperpage)-1)) %>
+    <% else %>
+    |
+      <%= link_to "Last Page", videos_path(page: ((@allvideos / @videosperpage))) %>
+    <% end %>
+<% end %>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+<div class="row text-center" style="display:flex; flex-wrap: wrap;">
+  <% @videos.each do |video| %>
+    <div class="col-lg-4 col-md-3 col-sm-2">
+    <div class="">
+        <%= link_to image_tag(video.thumbnail, class: "img-thumbnail thumbnail img-fluid"), video %>
+        </div>
+        <%= video.title %><br>
+        <small>Posted by <%= video.user&.full_name || "[DELETED]" %></small>
+    </div>
+  <% end %>
+</div>
+
+<% if false %>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @videos.each do |video| %>
+      <tr>
+        <td><%= video.title %></td>
+        <td><%= video.description %></td>
+        <td><%= link_to 'Show', video %></td>
+        <% if user_signed_in? && can?(:manage, video) %>
+        <td><%= link_to 'Edit', edit_video_path(video) %></td>
+        <td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+        <td><small>Posted by <%= video.user&.full_name || "[DELETED]" %></small></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+<br>
+
+

@@ -1,0 +1,77 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Pictures</h1>
+<div>
+<%= link_to 'New Picture', new_picture_path, class: "btn btn-lg btn-primary" %>
+</div>
+<br>
+
+
+<% unless @page == 0 %>
+<%= link_to "First Page", pictures_path(page: 0) %>
+|
+<%= link_to "Previous Page", pictures_path(page: @page - 1) %>
+<% end %>
+
+
+<% unless (@page + 1) > (@allpictures / @picturesperpage) %>
+<% unless ((@page + 1) * @picturesperpage) == @allpictures %>
+  |
+  <%= link_to "Next Page", pictures_path(page: @page + 1) %>
+      <% if (@allpictures % @picturesperpage) == 0 %>
+      |
+        <%= link_to "Last Page", pictures_path(page: ((@allpictures / @picturesperpage)-1)) %>
+      <% else %>
+      |
+        <%= link_to "Last Page", pictures_path(page: ((@allpictures / @picturesperpage))) %>
+      <% end %>
+  <% end %>
+<% end %>
+
+
+
+<div class="row text-center" style="display:flex; flex-wrap: wrap;">
+  <% @pictures.each do |picture| %>
+    <div class="col-lg-4 col-md-3 col-sm-2">
+    <div class="">
+        <%= link_to image_tag(picture.picture, class: "img-thumbnail thumbnail img-fluid"), picture %>
+        </div>
+        <div class="caption">
+          <%= picture.title %><br>
+          <small>Posted by <%= picture.user&.full_name || "[DELETED]" %></small>
+        </div>
+    </div>
+  <% end %>
+</div>
+
+<% if false %>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Thumbnail</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pictures.each do |picture| %>
+      <tr>
+        <td><%= picture.title %></td>
+        <td><%= picture.description %></td>
+        <td><%= image_tag(picture.picture) %></td>
+        <td><%= link_to 'Show', picture %></td>
+        <% if user_signed_in? && can?(:manage, picture) %>
+        <td><%= link_to 'Edit', edit_picture_path(picture) %></td>
+        <td><%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+        <td><small>Posted by <%= picture.user&.full_name || "[DELETED]" %></small></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+<br>
+
+

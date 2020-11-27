@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @story.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @story.body %>
+</p>
+<% if user_signed_in? && can?(:manage, @story) %>
+<%= link_to 'Delete', @story, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Edit', edit_story_path(@story) %> |
+<% end %>
+<%= link_to 'Back', stories_path(:page => "0")  %>
+<small>Posted by <%= @story.user&.full_name || "[DELETED]" %></small>
+
+<h2>Comments</h2>
+
+<%= form_for [@story, @story_comment] do |f| %>
+  <%#= f.hidden_field :story_id, value: @story.id %>
+  <div>
+    <%= f.text_area(
+      :body, cols: 60, rows: 6, placeholder: "What did you think of this story?"
+    ) %>
+  </div>
+  <%= f.submit "Submit" %>
+<% end %>
+
+<div class="answer-list">
+  <% @story_comments.each do |comment| %>
+      <div>
+        <p>
+          <%= comment.body %> <br />
+          <small>
+            Posted <%= time_ago_in_words(comment.created_at) %> ago
+          </small>
+          <% if user_signed_in? && can?(:manage, comment) %>
+          <small><%= link_to("Delete Comment", story_comment_path(comment),method: :delete, data: { confirm: "Are you sure?"}) %></small>
+          <small><%= link_to("Edit Comment", edit_story_comment_path(comment)) %></small>
+          <% end %>
+          <small>Posted by <%= comment.user&.full_name || "[DELETED]" %></small>
+        </p>
+      </div>
+    <% end %>
+</div>
