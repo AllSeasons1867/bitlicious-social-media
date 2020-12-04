@@ -62,5 +62,8 @@
       <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
+    <span class="nav-link">
+      <%= link_to "README", asset_path("README.pdf", skip_pipeline: true) %>
+    </span>
   </div>
 </nav>
