@@ -49,7 +49,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Latest Videos</h1>
-<%= link_to 'New Video', new_video_path %>
+<h5><%= link_to 'New Video', new_video_path %></h5>
 
 <div class="row text-center" style="display:flex; flex-wrap: wrap;">
   <% @videos.each do |video| %>
@@ -102,7 +102,7 @@
 <hr> 
 
 <h1>Latest Pictures</h1>
-<%= link_to 'New Picture', new_picture_path %>
+<h5><%= link_to 'New Picture', new_picture_path %></h5>
 
 <div class="row text-center" style="display:flex; flex-wrap: wrap;">
   <% @pictures.each do |picture| %>
@@ -152,7 +152,7 @@
 <hr>
 
 <h1>Latest Forum Posts</h1>
-<%= link_to 'New Post', new_post_path %>
+<h5><%= link_to 'New Post', new_post_path %></h5>
 
 <table>
   <thead>
