@@ -6,6 +6,8 @@ class HomeController < ApplicationController
     end
     def show
     end
+    def donation
+    end
     def search 
         if params[:q].blank? 
             redirect_to(root_path, alert: "No Search Query Given!") and return
