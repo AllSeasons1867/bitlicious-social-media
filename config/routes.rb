@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   get('/about', {to: 'home#show'})
 
+  get('/donation', {to: 'home#donation'})
+
   resources :comments
 
   resources :video_comments
