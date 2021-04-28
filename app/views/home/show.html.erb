@@ -1,18 +1,72 @@
-<h1>About our Community: Helm's Deep and the Junto</h1>
+<style>
+    aside {
+        display: none;
+    }
+</style>
+
+<h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet augue interdum risus lobortis, non hendrerit ex scelerisque. Proin dapibus efficitur ullamcorper. Nam nec dolor quis justo venenatis hendrerit a quis ligula. Suspendisse facilisis, felis sed molestie posuere, orci nulla fermentum nulla, egestas ultricies ex nisl sed nibh.</h1>
 
 <br>
 <br>
 
 <main>
 
-<p>Helm's Deep is a community created for the purposes of open discourse. The primary directive of this site is to provide its members with protection for their freedom of expression. It is a place for non-censored conversation, collaboration, and the free exchange of ideas. Members of the Helm's Deep community are known as the Junto.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet augue interdum risus lobortis, non hendrerit ex scelerisque. Proin dapibus efficitur ullamcorper. Nam nec dolor quis justo venenatis hendrerit a quis ligula. Suspendisse facilisis, felis sed molestie posuere, orci nulla fermentum nulla, egestas ultricies ex nisl sed nibh.</p>
 
-<p>The original Junto were a group of citizens coordinated by the great Benjmamin Franklin. It was a group of enterprising tradesman and artisans that sought to improve themselves and each other through collaboration, honest self-expression, and discussion. This group exists to carry on and expand that great legacy into the digital age. On this forum we are equal parts entrepreneurial, altruistic, and intellectual.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet augue interdum risus lobortis, non hendrerit ex scelerisque. Proin dapibus efficitur ullamcorper. Nam nec dolor quis justo venenatis hendrerit a quis ligula. Suspendisse facilisis, felis sed molestie posuere, orci nulla fermentum nulla, egestas ultricies ex nisl sed nibh.</p>
 
 <p>
-Any content that is <strong><i>legal</i></strong> may be posted here and maintained. The privacy of our members is our top priority. Using a combination of TOR, advanced encryption, and NO advertising, this site is what Facebook should have been but failed to become. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet augue interdum risus lobortis, non hendrerit ex scelerisque. Proin dapibus efficitur ullamcorper. Nam nec dolor quis justo venenatis hendrerit a quis ligula. Suspendisse facilisis, felis sed molestie posuere, orci nulla fermentum nulla, egestas ultricies ex nisl sed nibh. 
 </p>
 
 <br>
 <p>- Forrest Wong</p>
+
+<div>
+    <h3>Admin Profiles</h3>
+
+    <button data-page="page1">Harry</button>
+    <button data-page="page2">Hermione</button>
+    <button data-page="page3">Ron</button>
+
+    <aside id="page1">
+        <h2>Harry Potter</h2>
+        <img src="https://media1.popsugar-assets.com/files/thumbor/fAzDfg5bOasPxyoo9A4CPbgvxWw/660x0:1312x967/fit-in/728xorig/filters:format_auto-!!-:strip_icc-!!-/2020/02/28/913/n/1922283/d41abaac5e597e33a9d771.12680042_/i/Harry-Potter-Quotes-Quiz.jpg" width="400" />
+        <p>Harry had a thin face, knobbly knees, black hair and bright-green eyes. He wore round glasses held together with a lot of Sellotape because of all the times Dudley had punched him on the nose.</p>
+    </aside>
+    <aside id="page2">
+        <h2>Hermione Granger</h2>
+        <img src="https://myhero.com/images/guest/g282317/hero105677/image2.jpg" width="400" />
+        <p>Hermione first met Harry Potter and Ron Weasley aboard the Hogwarts Express, who found her unfriendly and somewhat of an "insufferable know-it-all", an impression reinforced by her constant correct answers and eagerness to please the professors. However, she stepped in to take the blame from the boys after they had saved her from a troll on Hallowe'en in 1991, surprising them in a grateful way, which led to them quickly becoming friends. She later played a crucial role in protecting the Philosopher's Stone from Voldemort.</p>
+    </aside>
+    <aside id="page3">
+        <h2>Ron Weasley</h2>
+        <img src="https://upload.wikimedia.org/wikipedia/en/5/5e/Ron_Weasley_poster.jpg" width="400" />
+        <p>He skipped his last year of school in order to accompany Harry and Hermione on a hunt to destroy all of Lord Voldemort's Horcruxes and fought in the Battle of Hogwarts in 1998, during which he lost his brother Fred, a loss which devastated him and his family, especially George, Fred's twin.</p>
+    </aside>
+</div>
+
 </main>
+
+<script>
+
+function showPage(page) {
+
+    document.querySelectorAll('aside').forEach(p => {
+        p.style.display = "none";
+    });
+
+    document.getElementById(page).style.display = "block";
+
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll("button").forEach(button => {
+        button.onclick = function() {
+            showPage(this.dataset.page);
+        };
+    });
+});
+
+</script>
